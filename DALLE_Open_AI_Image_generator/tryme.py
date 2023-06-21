@@ -1,5 +1,5 @@
 import openai
-from config import key
+from config2 import key
 
 openai.api_key = key
 response = openai.Image.create(prompt="a cricket match", n=1, size="256x256")
