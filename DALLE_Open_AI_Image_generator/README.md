@@ -21,7 +21,7 @@ You need to generate your own API key from https://platform.openai.com/overview
 ## Screenshots
 ![Alt text](<1.png>)
 
-![Alt text](<2.png>)
+![Alt text](<3.png>)
 
 ## Explanation
 To be updated soon......
