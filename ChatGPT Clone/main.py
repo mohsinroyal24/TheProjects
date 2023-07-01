@@ -6,7 +6,7 @@ import openai
 
 openai.api_key = config.api_key
 
-app.config["MONGO_URI"] = "mongodb+srv://mohsin24:vk1824@cluster0.mo9gerh.mongodb.net/chatGPT"
+app.config["MONGO_URI"] ="use link(credientials) from MONGODb compass"
 mongo = PyMongo(app)
 
 @app.route("/")
