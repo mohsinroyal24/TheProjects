@@ -10,33 +10,6 @@
   .right2 {
     display: none;
   }
-
-  .typing::after {
-    content: '';
-    display: inline-block;
-    animation: typing 1s steps(40, end);
-  }
-
-  @keyframes typing {
-    0% {
-      width: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      width: 100%;
-      opacity: 1;
-    }
-  }
-
-  .typing {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 1s;
-    animation-timing-function: linear;
-  }
-
   </style>
   <title>New Chat</title>
 </head>
@@ -185,7 +158,7 @@
           <img class="w-9 h-9" src="https://chat.openai.com/favicon.ico" alt="">
           <div class="flex space-y-4 flex-col">
             <div id="question1">Loading...</div>
-            <div id="solution" class="typing">Loading...</div>
+            <div id="solution">Loading...</div>
           </div>
         </div>
       </div>

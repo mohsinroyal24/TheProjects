@@ -1,11 +1,12 @@
 from flask import Flask, render_template,jsonify, request
 from flask_pymongo import PyMongo
+import config
 app = Flask(__name__)
+import openai
 
+openai.api_key = config.api_key
 
-
-app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://mohsin:vk1824@cluster0.pkpyiux.mongodb.net/chatGPT"
+app.config["MONGO_URI"] = "mongodb+srv://mohsin24:vk1824@cluster0.mo9gerh.mongodb.net/chatGPT"
 mongo = PyMongo(app)
 
 @app.route("/")
@@ -15,21 +16,32 @@ def home():
     print(myChats)
     return render_template("index.html", myChats = myChats)
 
-@app.route("/api", methods=["GET","POST"])
+@app.route("/api", methods=["GET", "POST"])
 def qa():
-    if request.method=="POST":
-        print(request.form, request.json)
+    if request.method == "POST":
+        print(request.json)
         question = request.json.get("question")
         chat = mongo.db.chats.find_one({"question": question})
         print(chat)
         if chat:
-            data = {"result": f"{chat['answer']}"}
+            data = {"question": question, "answer": f"{chat['answer']}"}
             return jsonify(data)
         else:
-            data = {"result": f"Answer of {question}"}
-            mongo.db.chats.insert_one({"question":question, "answer": f"Answer from openai for {question}"})
-        return jsonify(data)
-    data = {"result": "Thankyou for asking"}
+            response = openai.Completion.create(
+                    model="text-davinci-003",
+                    prompt=question,
+                    temperature=0.7,
+                    max_tokens=256,
+                    top_p=1,
+                    frequency_penalty=0,
+                    presence_penalty=0
+                    )
+            print(response)
+            data = {"question": question, "answer": response["choices"][0]["text"]}
+            mongo.db.chats.insert_one({"question": question, "answer": response["choices"][0]["text"]})
+            return jsonify(data)
+    data = {"result": "Thank you! I'm just a machine learning model designed to respond to questions and generate text based on my training data. Is there anything specific you'd like to ask or discuss? "}
+        
     return jsonify(data)
 
 app.run(debug=True)

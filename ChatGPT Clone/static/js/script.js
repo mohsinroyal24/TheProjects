@@ -23,7 +23,7 @@ sendButton.addEventListener("click",async()=>{
 
     // get the answer and populate it
     let result = await postData("/api", {"question": questionInput})
-    solution.innerHTML = result.result
+    solution.innerHTML = result.answer
 
     // Remove the typing animation class to stop the animation
 
