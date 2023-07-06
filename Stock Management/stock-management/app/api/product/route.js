@@ -11,8 +11,8 @@ const client = new MongoClient(uri);
     const database = client.db('stock');
     const inventory = database.collection('inventory');
     const query = {}
-    const allProducts = await inventory.find(query).toArray();
-    return NextResponse.json({allProducts})
+    const products = await inventory.find(query).toArray();
+    return NextResponse.json({sucess: true, products})
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
