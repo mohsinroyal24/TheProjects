@@ -7,7 +7,6 @@ This is a simple Product Inventory Management System that allows you to search, 
 - Search for products by name
 - Filter products by category
 - Add new products to the inventory
-- Delete existing products from the inventory
 - Real-time updates without page reload
 
 ## Technologies Used
@@ -66,9 +65,6 @@ Adds a new product to the inventory.
 
 Deletes a product from the inventory.
 
-### GET /api/categories
-
-Returns a list of all categories.
 
 ## Contributing
 
