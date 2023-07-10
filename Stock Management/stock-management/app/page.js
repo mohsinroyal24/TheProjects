@@ -13,7 +13,6 @@ export default function Home() {
   const [loadingAction, setLoadingAction] = useState(false);
   const [dropdown, setDropdown] = useState([]);
   const [deletedProduct, setDeletedProduct] = useState(null);
-  
 
   // Sample data for demonstration purposes
   const stockData = [
@@ -81,16 +80,6 @@ export default function Home() {
       }
       setProducts(newProducts);
 
-      let indexdrop = dropdown.findIndex((item) => item.slug == slug);
-      console.log(indexdrop, 'parse');
-      let newDropdown = JSON.parse(JSON.stringify(dropdown));
-      if (action == 'plus') {
-        newDropdown[indexdrop].quantity = parseInt(initialQuantity) + 1;
-      } else {
-        newDropdown[indexdrop].quantity = parseInt(initialQuantity) - 1;
-      }
-      setDropdown(newDropdown);
-      console.log(action, slug);
       setLoadingAction(true);
       const response = await fetch('/api/action', {
         method: 'POST',
@@ -142,6 +131,7 @@ export default function Home() {
   const handleChange = (e) => {
     setProductForm({ ...productForm, [e.target.name]: e.target.value });
   };
+
   const onDropdownEdit = async (e) => {
     let value = e.target.value;
     setQuery(value);
@@ -156,14 +146,28 @@ export default function Home() {
       setDropdown([]);
     }
   };
+
+  const refillStock = (slug) => {
+    const quantity = prompt("Enter the quantity:");
+    if (quantity !== null) {
+      const newProducts = products.map((product) => {
+        if (product.slug === slug) {
+          return { ...product, quantity: parseInt(quantity) };
+        }
+        return product;
+      });
+      setProducts(newProducts);
+    }
+  };
   
 
   return (
     <>
-      <Header products={products}
+      <Header
+        products={products}
         setProducts={setProducts}
-        setLoadingAction={setLoadingAction} />
-
+        setLoadingAction={setLoadingAction}
+      />
 
       {/* Search a product section */}
       <div className="container mx-10 mt-2 p-2">
@@ -248,7 +252,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      
 
       {/* Add a product section */}
       <div className="container mx-10 mt-2 p-2">
@@ -296,67 +299,110 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Current Stock section */}
-      <div id="current-stock"className="container mx-10 mt-2 p-2">
-        <h2 className="font-semibold text-2xl mb-2">Current Stock</h2>
-        <table className="table mt-8 w-full">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border">Name</th>
-              <th className="py-2 px-4 border">Quantity</th>
-              <th className="py-2 px-4 border">Price</th>
-              <th className="py-2 px-4 border">Remove Product</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products
-              .filter((product) => product.quantity > 0) // Filter out products with quantity 0
-              .map((product) => (
-                <tr key={product.id} className="text-center">
-                  <td className="py-2 px-4 border">{product.slug}</td>
-                  <td className="py-2 px-4 border">{product.quantity}</td>
-                  <td className="py-2 px-4 border">₹{product.price}</td>
-                  <td className="py-2 px-4 border">
-                    <button
-                      onClick={() => buttonAction('delete', product.slug)}
-                      disabled={loadingAction}
-                      className="delete cursor-pointer inline-block px-3 py-1 bg-red-500 text-white font-semibold rounded-lg shadow-md disabled:bg-red-200"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+
+{/* Current Stock section */}
+<div id="current-stock" className="container mx-10 mt-2 p-2">
+  <h2 className="font-semibold text-2xl mb-2">Current Stock</h2>
+  <table className="table mt-8 w-full">
+    <thead>
+      <tr>
+        <th className="py-2 px-4 border">Name</th>
+        {/* <th className="py-2 px-4 border">Quantity</th> */}
+        <th className="py-2 px-4 border">Price</th>
+        <th className="py-2 px-4 border">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {products
+        .filter((product) => product.quantity > 0) // Filter out products with quantity 0
+        .map((product) => (
+          <tr key={product.id} className="text-center">
+            <td className="py-2 px-4 border">{product.slug}</td>
+            <td className="py-2 px-4 border">₹{product.price}</td>
+            <td className="py-2 px-4 border">
+              <div className="flex justify-center items-center">
+                <button
+                  onClick={() => buttonAction('minus', product.slug, product.quantity)}
+                  disabled={loadingAction}
+                  className="subtract cursor-pointer px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
+                  style={{ marginRight: '0.5rem' }}
+                >
+                  -
+                </button>
+                <span className="quantity" style={{ minWidth: '1.5rem', textAlign: 'center' }}>
+                  {product.quantity}
+                </span>
+                <button
+                  onClick={() => buttonAction('plus', product.slug, product.quantity)}
+                  disabled={loadingAction}
+                  className="add cursor-pointer px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
+                  style={{ marginLeft: '0.5rem' }}
+                >
+                  +
+                </button>
+              </div>
+            </td>
+
+          </tr>
+        ))}
+    </tbody>
+  </table>
+</div>
+
+
+
+
       <br></br>
       <br></br>
-      {/* Out of Stock section */}
-      <div  id="out-of-stock" className="container mx-10 mt-2 p-2">
-        <h2 className="font-semibold text-2xl mb-2">Out of Stock Items</h2>
-        <table className="table mt-8 w-full">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border">Name</th>
-              <th className="py-2 px-4 border">Price</th>
+
+
+{/* Out of Stock section */}
+<div id="out-of-stock" className="container mx-10 mt-2 p-2">
+  <h2 className="font-semibold text-2xl mb-2">Out of Stock Items</h2>
+  <table className="table mt-8 w-full">
+    <thead>
+      <tr>
+        <th className="py-2 px-4 border">Name</th>
+        <th className="py-2 px-4 border">Price</th>
+        <th className="py-2 px-4 border">Refill stocks</th>
+        <th className="py-2 px-4 border">Remove Product</th>
+      </tr>
+    </thead>
+    <tbody>
+      {products.map((product) => {
+        if (product.quantity === 0) {
+          return (
+            <tr key={product.id} className="text-center">
+              <td className="py-2 px-4 border">{product.slug}</td>
+              <td className="py-2 px-4 border">₹{product.price}</td>
+              <td className="py-2 px-4 border">
+                <button
+                  onClick={() => refillStock(product.slug)}
+                  disabled={loadingAction}
+                  className="refill cursor-pointer px-3 py-1 bg-green-500 text-white font-semibold rounded-lg shadow-md disabled:bg-green-200"
+                >
+                  Refill
+                </button>
+              </td>
+              <td className="py-2 px-4 border">
+                <button
+                  onClick={() => buttonAction('delete', product.slug)}
+                  disabled={loadingAction}
+                  className="delete cursor-pointer px-3 py-1 bg-red-500 text-white font-semibold rounded-lg shadow-md disabled:bg-red-200"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => {
-              if (product.quantity === 0) {
-                return (
-                  <tr key={product.id} className="text-center">
-                    <td className="py-2 px-4 border">{product.slug}</td>
-                    <td className="py-2 px-4 border">₹{product.price}</td>
-                  </tr>
-                );
-              }
-              return null;
-            })}
-          </tbody>
-        </table>
-      </div>
+          );
+        }
+        return null;
+      })}
+    </tbody>
+  </table>
+</div>
+
+
 
       <ToastContainer />
     </>
