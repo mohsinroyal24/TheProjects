@@ -13,6 +13,7 @@ export default function Home() {
   const [loadingAction, setLoadingAction] = useState(false);
   const [dropdown, setDropdown] = useState([]);
   const [deletedProduct, setDeletedProduct] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(""); // Track the selected category
 
   // Sample data for demonstration purposes
   const stockData = [
@@ -94,7 +95,12 @@ export default function Home() {
     }
   };
 
-  const [productForm, setProductForm] = useState({});
+  const [productForm, setProductForm] = useState({
+    category: '',
+    slug: '',
+    quantity: '',
+    price: '',
+  });
 
   const addProduct = async (e) => {
     try {
@@ -109,7 +115,12 @@ export default function Home() {
       if (response.ok) {
         // Product added successfully
         console.log('Product added successfully!');
-        setProductForm({});
+        setProductForm({
+          category: '',
+          slug: '',
+          quantity: '',
+          price: '',
+        });
         toast.success('Product added successfully');
       } else {
         // Handle error if the server responds with an error status
@@ -126,6 +137,11 @@ export default function Home() {
     let rjson = await response.json();
     setProducts(rjson.products);
     e.preventDefault();
+  };
+
+  const handleChangeCategory = (e) => {
+    const category = e.target.value;
+    setSelectedCategory(category);
   };
 
   const handleChange = (e) => {
@@ -159,7 +175,7 @@ export default function Home() {
       setProducts(newProducts);
     }
   };
-  
+
 
   return (
     <>
@@ -169,95 +185,11 @@ export default function Home() {
         setLoadingAction={setLoadingAction}
       />
 
-      {/* Search a product section */}
-      <div className="container mx-10 mt-2 p-2">
-        <div className="text-green-800 text-center">{alert}</div>
-        <h2 className="font-semibold text-2xl mx-2">Search a product</h2>
-        <div className="search-form py-3 px-2 flex flex-wrap items-center">
-          <div className="w-full md:w-10/12">
-            <input
-              onChange={onDropdownEdit}
-              type="text"
-              placeholder="Enter the item to search"
-              className="w-full mt-2 px-4 py-2 rounderd border"
-            />
-          </div>
-          <div className="py-2 px-2 w-full md:w-2/12">
-            <select className="w-full mt-2 px-4 py-2 rounderd border">
-              <option value="">All</option>
-              <option value="category1">Category 1</option>
-              <option value="category2">Category 2</option>
-            </select>
-          </div>
-        </div>
-        {loading && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 50 50"
-            width="50px"
-            height="50px"
-          >
-            <circle
-              cx="25"
-              cy="25"
-              r="20"
-              fill="none"
-              stroke="#000000"
-              strokeWidth="4"
-              strokeDasharray="31.42"
-              strokeDashoffset="0"
-            >
-              <animate
-                attributeName="strokeDashoffset"
-                dur="1.5s"
-                repeatCount="indefinite"
-                from="0"
-                to="62.84"
-              />
-            </circle>
-          </svg>
-        )}
-
-        <div className="dropContainer mx-2 absolute w-[78.5vw] border-1 rounded-md bg-purple-100 ">
-          {dropdown.map((item) => (
-            <div
-              key={item.slug}
-              className="contatiner flex justify-between mx-3 p-1 my-1 border-b-2 border-purple-200"
-            >
-              <span className="slug">
-                {item.slug} ({item.quantity} available for ₹{item.price})
-              </span>
-              <div className="mx-5">
-                <button
-                  onClick={() => {
-                    buttonAction('minus', item.slug, item.quantity);
-                  }}
-                  disabled={loadingAction}
-                  className="subtract cursor-pointer inline-block px-3 py-1 mr-2 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
-                >
-                  -
-                </button>
-                <span className="quantity">{item.quantity}</span>
-                <button
-                  onClick={() => {
-                    buttonAction('plus', item.slug, item.quantity);
-                  }}
-                  disabled={loadingAction}
-                  className="add  cursor-pointer inline-block px-3 py-1 ml-2 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Add a product section */}
-      <div className="container mx-10 mt-2 p-2">
+            {/* Add a product section */}
+            <div className="container mx-10 mt-2 p-2">
         <h1 className="mx-2 font-semibold text-2xl">Add a product</h1>
-        <div className="product-form py-3 px-2 mb-6 flex flex-wrap items-center">
-          <div className="py-2 w-full md:w-8/12">
+        <div className="product-form py-3 px-2 mb-2 flex flex-wrap items-center">
+          <div className="py-2 w-full md:w-6/12">
             <input
               value={productForm?.slug || ''}
               name="slug"
@@ -288,6 +220,24 @@ export default function Home() {
             />
           </div>
           <div className="py-2 px-2 w-full md:w-2/12">
+            <select
+              value={productForm?.category || ''}
+              name="category"
+              onChange={handleChange}
+              className="w-full mt-2 px-4 py-2 rounded border"
+            >
+              <option value="">All</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Toys">Toys</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Electronics">Electronics</option>
+            </select>
+          </div>
+          <div className="py-2 px-2 w-full md:w-2/12">
             <button
               onClick={addProduct}
               className="bg-purple-500 hover:bg-purple-600 text-white rounded mt-2 px-2 inline-block transition-colors duration-300 ease-in-out"
@@ -300,61 +250,81 @@ export default function Home() {
       </div>
 
 
-{/* Current Stock section */}
-<div id="current-stock" className="container mx-10 mt-2 p-2">
-  <h2 className="font-semibold text-2xl mb-2">Current Stock</h2>
-  <table className="table mt-8 w-full">
-    <thead>
-      <tr>
-        <th className="py-2 px-4 border">Name</th>
-        {/* <th className="py-2 px-4 border">Quantity</th> */}
-        <th className="py-2 px-4 border">Price</th>
-        <th className="py-2 px-4 border">Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      {products
-        .filter((product) => product.quantity > 0) // Filter out products with quantity 0
-        .map((product) => (
-          <tr key={product.id} className="text-center">
-            <td className="py-2 px-4 border">{product.slug}</td>
-            <td className="py-2 px-4 border">₹{product.price}</td>
-            <td className="py-2 px-4 border">
-              <div className="flex justify-center items-center">
-                <button
-                  onClick={() => buttonAction('minus', product.slug, product.quantity)}
-                  disabled={loadingAction}
-                  className="subtract cursor-pointer px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
-                  style={{ marginRight: '0.5rem' }}
-                >
-                  -
-                </button>
-                <span className="quantity" style={{ minWidth: '1.5rem', textAlign: 'center' }}>
-                  {product.quantity}
-                </span>
-                <button
-                  onClick={() => buttonAction('plus', product.slug, product.quantity)}
-                  disabled={loadingAction}
-                  className="add cursor-pointer px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
-                  style={{ marginLeft: '0.5rem' }}
-                >
-                  +
-                </button>
-              </div>
-            </td>
-
-          </tr>
-        ))}
-    </tbody>
-  </table>
-</div>
-
-
-
-
+      {/* Current Stock section */}
+      <div id="current-stock" className="container mx-10 mt-2 p-2">
+      <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <h2 className="font-semibold text-2xl mr-2">Current Stock</h2>
+            {/* Other elements */}
+          </div>
+          <div className="py-2 px-2 w-full md:w-2/12">
+            <select
+              className="w-full mt-2 px-4 py-2 rounded border"
+              value={selectedCategory}
+              onChange={handleChangeCategory}
+            >
+              <option value="">All</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Toys">Toys</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Electronics">Electronics</option>
+            </select>
+          </div>
+        </div>
+        <table className="table mt-8 w-full">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 border">Name</th>
+              <th className="py-2 px-4 border">Category</th>
+              <th className="py-2 px-4 border">Price</th>
+              <th className="py-2 px-4 border">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products
+              .filter((product) => product.quantity > 0) // Filter out products with quantity 0
+              .filter((product) => !selectedCategory || product.category === selectedCategory) // Apply category filter
+              .map((product) => (
+                <tr key={product.id} className="text-center">
+                  <td className="py-2 px-4 border">{product.slug}</td>
+                  <td className="py-2 px-4 border">{product.category}</td>
+                  <td className="py-2 px-4 border">₹{product.price}</td>
+                  <td className="py-2 px-4 border">
+                    <div className="flex justify-center items-center">
+                      <button
+                        onClick={() => buttonAction('minus', product.slug, product.quantity)}
+                        disabled={loadingAction}
+                        className="subtract cursor-pointer px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
+                        style={{ marginRight: '0.5rem' }}
+                      >
+                        -
+                      </button>
+                      <span
+                        className="quantity"
+                        style={{ minWidth: '1.5rem', textAlign: 'center' }}
+                      >
+                        {product.quantity}
+                      </span>
+                      <button
+                        onClick={() => buttonAction('plus', product.slug, product.quantity)}
+                        disabled={loadingAction}
+                        className="add cursor-pointer px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
+                        style={{ marginLeft: '0.5rem' }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
       <br></br>
-      <br></br>
-
 
 {/* Out of Stock section */}
 <div id="out-of-stock" className="container mx-10 mt-2 p-2">
@@ -363,6 +333,7 @@ export default function Home() {
     <thead>
       <tr>
         <th className="py-2 px-4 border">Name</th>
+        <th className="py-2 px-4 border">Category</th>
         <th className="py-2 px-4 border">Price</th>
         <th className="py-2 px-4 border">Refill stocks</th>
         <th className="py-2 px-4 border">Remove Product</th>
@@ -374,6 +345,7 @@ export default function Home() {
           return (
             <tr key={product.id} className="text-center">
               <td className="py-2 px-4 border">{product.slug}</td>
+              <td className="py-2 px-4 border">{product.category}</td>
               <td className="py-2 px-4 border">₹{product.price}</td>
               <td className="py-2 px-4 border">
                 <button
@@ -401,7 +373,6 @@ export default function Home() {
     </tbody>
   </table>
 </div>
-
 
 
       <ToastContainer />
