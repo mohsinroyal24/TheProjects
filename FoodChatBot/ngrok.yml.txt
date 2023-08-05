@@ -1,0 +1,7 @@
+authtoken:2TYg7d7gh8roF9VpI2JeRy82oXq_hBjF93STkWdKdj5oFMab
+
+tunnels:
+  web:
+    addr: 8000
+  api:
+    addr: 8080
