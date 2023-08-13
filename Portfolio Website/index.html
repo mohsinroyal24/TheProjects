@@ -25,7 +25,7 @@
             justify-content: space-around;
             align-items: center;
             height: 70px;
-            background-color: #683fa7;
+            background-color: #061659;
         }
 
         nav ul {
@@ -75,8 +75,23 @@
             font-size: 2.5rem;
         }
 
+        
+        .leftSection .buttons{
+            padding: 50px 0;
+        }
+
+        .leftSection .btn{
+            padding: 12px;
+            background: #1e2168;
+            color: white;
+            border: 2px solid white;
+            border-radius: 6px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
         .rightSection img {
-            width: 86%;
+            width: 96%;
         }
 
         .purple {
@@ -104,7 +119,7 @@
             padding-bottom: 50px;
             display: flex;
             text-align: center;
-            font-size: 2.7rem;
+            font-size: 3rem;
             font-weight: 900;
             color: #1890e1;
         }
@@ -112,10 +127,14 @@
             flex: 30%;
         }
 
+        .secondSection{
+            margin-bottom: 100px;
+        }
         .secondSection h1 {
             font-size: 2.5rem;
             font-weight: 900;
             color: #3298dc;
+            
         }
 
         /* Timeline Styles */
@@ -182,6 +201,28 @@
             border-radius: 50%;
             border: 2px solid white;
         }
+
+        footer{
+            background-color: #010102;
+        }
+        .footer{
+            display: flex;
+            padding: 23px 122px;
+            justify-content: space-evenly;
+        }
+
+        .footer ul{
+            list-style: none;
+        }
+        .footer > div {
+            width: 223px;
+        }
+
+        footer .footer-rights{
+            text-align: center;
+            color: gray;
+            padding: 12px;
+        }
     </style>
 </head>
 
@@ -207,6 +248,10 @@
                 Hi, My name is <span class="purple">Mohsin</span>
                 <div>and I am a Passionate</div>
                 <span id="element"></span>
+                <div class="buttons">
+                    <button class="btn">Dowload Resume</button>
+                    <button class="btn">Visit Github</button>
+                </div>
             </div>
             <div class="rightSection">
                 <img src="da2.png" alt="" srcset="">
@@ -256,6 +301,42 @@
             </div>
         </section>
     </main>
+
+    <footer>
+        <div class="footer">
+            <div class="footer-first">
+                <h3>Mohsin's Developer Portfolio</h3>
+            </div>
+            <div class="footer-second">
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    <li>Follow</li>
+                </ul>
+            </div>
+            <div class="footer-third">
+                <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+                <li>Follow</li>
+            </ul>
+            </div>
+            <div class="footer-fouth">
+            <ul>    
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+                <li>Follow</li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="footer-rights">
+            copyright &#169 www.mohsinroy.com | All rights reserved 
+        </div>
+    </footer>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
         var typed = new Typed('#element', {
