@@ -75,14 +75,14 @@
             font-size: 2.5rem;
         }
 
-        
-        .leftSection .buttons{
+
+        .leftSection .buttons {
             padding: 50px 0;
         }
 
-        .leftSection .btn{
+        .leftSection .btn {
             padding: 12px;
-            background: #1e2168;
+            background: #0f125b;
             color: white;
             border: 2px solid white;
             border-radius: 6px;
@@ -95,11 +95,11 @@
         }
 
         .purple {
-            color: rgb(170, 107, 228);
+            color: #3298dc;
         }
 
         #element {
-            color: rgb(170, 107, 228);
+            color: #3298dc;
         }
 
         .secondSection {
@@ -113,28 +113,30 @@
             margin-right: 1%;
         }
 
-        .workhead h1{
+        .workhead h1 {
             max-width: 80vw;
             margin: auto;
-            padding-bottom: 50px;
+            padding-bottom: 20px;
             display: flex;
             text-align: center;
             font-size: 3rem;
             font-weight: 900;
             color: #1890e1;
         }
+
         .education {
             flex: 30%;
         }
 
-        .secondSection{
+        .secondSection {
             margin-bottom: 100px;
         }
+
         .secondSection h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
+            font-size: 2rem;
+            font-weight: 700;
             color: #3298dc;
-            
+
         }
 
         /* Timeline Styles */
@@ -156,6 +158,8 @@
 
         .secondSection .milestone p {
             color: #ccc;
+            font-size: 1.15rem;
+            padding: 2px;
         }
 
         .secondSection .milestone:before {
@@ -165,9 +169,10 @@
             left: -16px;
             width: 23px;
             height: 25px;
-            background-color: #3298dc;;
+            background-color: #3298dc;
+            ;
             border-radius: 50%;
-            border: 4px solid white;
+            border: 3px solid white;
         }
 
         .secondSection .milestone:last-child {
@@ -176,13 +181,17 @@
 
         /* Custom Education Milestone Design */
         .education .milestone {
-            border-left: 2px solid #3298dc; /* Change border color for education */
-            padding: 0px 30px 30px; /* Adjust padding for education */
-            background-color: rgba(50, 152, 220, 0.1); /* Background color for education */
+            border-left: 2px solid #3298dc;
+            /* Change border color for education */
+            padding: 0px 30px 30px;
+            /* Adjust padding for education */
+            background-color: rgba(50, 152, 220, 0.1);
+            /* Background color for education */
         }
 
         .education .milestone h2 {
-            color: #3298dc; /* Change color for education */
+            color: #3298dc;
+            /* Change color for education */
             font-size: 1.5rem;
         }
 
@@ -197,32 +206,286 @@
             left: -16px;
             width: 23px;
             height: 25px;
-            background-color: #3298dc; /* Change background color for education */
+            background-color: #3298dc;
+            /* Change background color for education */
             border-radius: 50%;
-            border: 2px solid white;
+            border: 3px solid white;
         }
 
-        footer{
+        footer {
             background-color: #010102;
         }
-        .footer{
+
+        .footer {
             display: flex;
             padding: 23px 122px;
             justify-content: space-evenly;
         }
 
-        .footer ul{
+        .footer ul {
             list-style: none;
         }
-        .footer > div {
+
+        .footer>div {
             width: 223px;
         }
 
-        footer .footer-rights{
+        footer .footer-rights {
             text-align: center;
             color: gray;
             padding: 12px;
         }
+
+        @media (max-width: 1000px) {
+            /* Navbar */
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #061659;
+                /* display: none; */
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            nav ul.show {
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* First section */
+            .firstSection {
+                flex-direction: column-reverse;
+                align-items: center;
+                margin: 100px 0;
+            }
+
+            .leftSection {
+                /* text-align: center; */
+                width: 100% !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .leftSection .buttons {
+                padding: 20px 0;
+            }
+
+            .rightSection {
+                width: 422px !important;
+                /* Adjust the width of the image */
+            }
+
+
+            /* Work and Education sections */
+            .secondSection {
+                flex-direction: column;
+            }
+
+            .work,
+            .education {
+                flex: 100%;
+            }
+
+            /* Footer */
+            .footer {
+                flex-direction: column;
+                padding: 20px 0;
+                text-align: center;
+            }
+
+            .footer>div {
+                width: 100%;
+            }
+
+            .footer {
+                flex-direction: column; /* Stack footer elements */
+                align-items: center; /* Center the content */
+                text-align: center; /* Center the list items */
+            }
+
+            .footer > div {
+                width: 100%;
+                padding: 10px 0; /* Add spacing between sections */
+                /* border-top: 1px solid #444; Add horizontal separator */
+            }
+
+            .footer ul {
+                list-style: none;
+                display: flex;
+                justify-content: center; 
+                flex-direction: row;/* Remove bullet points */
+                padding: 5px 5px;
+                /* width: 20%; */
+            }
+
+            .footer ul li {
+                margin: 5px 0; /* Add spacing between list items */
+                padding: 5px 5px;
+            }
+
+            footer .footer-rights {
+                padding: 10px; /* Reduce padding */
+            }
+
+            /* Display footer-second, footer-third, and footer-fourth side by side */
+            .footer-second,
+            .footer-third,
+            .footer-fourth {
+                flex-basis: calc(33.33% - 10px); /* Equal width for each section with spacing */
+                margin-right: 10px; /* Add spacing between sections */
+            }
+
+            .footer-second:last-child,
+            .footer-third:last-child,
+            .footer-fourth:last-child {
+                margin-right: 0; /* Remove right margin from the last section */
+            }
+
+            body {
+                min-width: fit-content;
+            }
+        }
+
+        @media (max-width: 488px) {
+    /* Navbar styles */
+    nav ul {
+        top: 40px; /* Adjust the top spacing for the menu items */
+    }
+
+    nav ul li a {
+        display: none; /* Hide the menu items */
+    }
+
+    /* First section */
+    .firstSection {
+        margin: 0; /* Remove margin */
+        flex-direction: column-reverse;
+    }
+
+    .leftSection {
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        padding: 0; /* Remove padding */
+        margin-bottom: 20px;
+    }
+
+    /* Keep the inline elements within .leftSection on the same line */
+    .leftSection {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leftSection .buttons {
+        flex-direction: row; /* Align buttons in a row */
+        justify-content: center; /* Center buttons horizontally */
+    }
+
+    .leftSection .btn {
+        margin: 0 10px; /* Add spacing between buttons */
+    }
+
+    .rightSection {
+        width: 100% !important; /* Make the image full width */
+        font-size: 1.4rem;
+        margin: 0; /* Remove margin */
+    }
+
+    .workhead h1 {
+        font-size: 1.5rem;
+        padding-bottom: 0;
+        padding-left: 10px
+    }
+
+    .work h2 {
+        font-size: 1.2rem !important;
+        padding-left: 20px
+    }
+    .education h2 {
+        font-size: 1.2rem !important;
+        padding-left: 20px
+    }
+
+    main hr {
+    border: 0;
+    background: #9c97f1;
+    height: 1.2px;
+    /* width: 100%; */
+    margin: 25px 4px;
+    
+}
+
+    /* Timeline styles */
+    .secondSection .milestone {
+        padding: 0; /* Remove padding */
+        font-size: 1.2rem;
+    }
+
+    .secondSection .milestone p {
+        font-size: 1rem; /* Reduce font size */
+        padding-left: 20px; /* Add left padding */
+    }
+    .footer {
+                flex-direction: column; /* Stack footer elements */
+                align-items: center; /* Center the content */
+                text-align: center; /* Center the list items */
+            }
+
+            .footer > div {
+                width: 100%;
+                padding: 10px 0; /* Add spacing between sections */
+                /* border-top: 1px solid #444; Add horizontal separator */
+            }
+
+            .footer ul {
+                list-style: none;
+                display: flex;
+                justify-content: center; 
+                flex-direction: row;/* Remove bullet points */
+                padding: 5px 5px;
+                /* width: 20%; */
+            }
+
+            .footer ul li {
+                margin: 5px 0; /* Add spacing between list items */
+                padding: 5px 5px;
+            }
+
+            footer .footer-rights {
+                padding: 10px; /* Reduce padding */
+            }
+
+            /* Display footer-second, footer-third, and footer-fourth side by side */
+            .footer-second,
+            .footer-third,
+            .footer-fourth {
+                flex-basis: calc(33.33% - 10px); /* Equal width for each section with spacing */
+                margin-right: 10px; /* Add spacing between sections */
+            }
+
+            .footer-second:last-child,
+            .footer-third:last-child,
+            .footer-fourth:last-child {
+                margin-right: 0; /* Remove right margin from the last section */
+            }
+        }
+    body {
+        min-width: fit-content;
+    }
+        
     </style>
 </head>
 
@@ -231,7 +494,12 @@
         <nav>
             <div class="left">Mohsin's Portfolio</div>
             <div class="right">
-                <ul>
+                <div class="menu-icon" onclick="toggleMenu()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <ul id="menu-items">
                     <li><a href="/">Home</a></li>
                     <li><a href="/">About</a></li>
                     <li><a href="/">Services</a></li>
@@ -245,9 +513,10 @@
     <main>
         <section class="firstSection">
             <div class="leftSection">
-                Hi, My name is <span class="purple">Mohsin</span>
+                <div> Hi, My name is <span class="purple">Mohsin</span></div>
                 <div>and I am a Passionate</div>
-                <span id="element"></span>
+                <div><span id="element"></span></div>
+                <!-- <span id="element"></span> -->
                 <div class="buttons">
                     <button class="btn">Dowload Resume</button>
                     <button class="btn">Visit Github</button>
@@ -258,24 +527,24 @@
             </div>
         </section>
         <hr>
-        <div class="workhead">             
-        <h1>Work Experience and Education</h1>             
-        </div> 
+        <div class="workhead">
+            <h1>Work Experience and Education</h1>
+        </div>
         <section class="secondSection">
 
             <div class="work">
                 <div class="timeline">
                     <div class="milestone">
-                        <h2>Company A</h2>
-                        <p>Position: Data Analyst</p>
-                        <p>Date: January 2020 - Present</p>
-                        <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h2>TheMathCompany</h2>
+                        <p><b>Position:</b> Data Analyst</p>
+                        <p><b>Date:</b> January 2023 - May 2023</p>
+                        <p><b>Description:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                     <div class="milestone">
-                        <h2>Company B</h2>
-                        <p>Position: Web Developer</p>
-                        <p>Date: June 2017 - December 2019</p>
-                        <p>Description: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <h2>Fiverr</h2>
+                        <p><b>Position:</b> Cricket content writer</p>
+                        <p><b>Date:</b> June 2019 - April 2021</p>
+                        <p><b>Description:</b> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>
                     <!-- Add more milestones here -->
                 </div>
@@ -300,6 +569,9 @@
                 </div>
             </div>
         </section>
+
+
+
     </main>
 
     <footer>
@@ -317,26 +589,32 @@
             </div>
             <div class="footer-third">
                 <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-                <li>Follow</li>
-            </ul>
-            </div>
-            <div class="footer-fouth">
-            <ul>    
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-                <li>Follow</li>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    <li>Follow</li>
                 </ul>
             </div>
-            
+            <div class="footer-fouth">
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    <li>Follow</li>
+                </ul>
+            </div>
+
         </div>
         <div class="footer-rights">
-            copyright &#169 www.mohsinroy.com | All rights reserved 
+            copyright &#169 www.mohsinroy.com | All rights reserved
         </div>
     </footer>
+    <script>
+        function toggleMenu() {
+            const menuItems = document.getElementById("menu-items");
+            menuItems.classList.toggle("show");
+        }
+    </script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
         var typed = new Typed('#element', {
