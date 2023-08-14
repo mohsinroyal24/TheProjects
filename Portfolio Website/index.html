@@ -18,35 +18,63 @@
             background-color: rgb(0, 0, 33);
             color: white;
             font-family: 'Poppins', sans-serif;
+            
         }
 
-        nav {
+        header{
+            background-color: #061659
+        }
+        .navbar {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
             height: 70px;
             background-color: #061659;
+            padding: 0 24px;
+            
         }
 
-        nav ul {
-            display: flex;
-            justify-content: center;
+        li{
+            list-style-type: none;
         }
 
-        nav ul li {
-            list-style: none;
-            margin: 0 23px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
+        a{
             color: white;
+            text-decoration: none;
+        }
+        
+        .nav-menu{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px
         }
 
-        nav ul li a:hover {
-            text-decoration: none;
-            color: lavender;
+        .nav-branding{
+            font-size: 1.4rem;
+        }
+
+        .nav-link{
+            transition: 0.7e ease;
+        }
+        .nav-link:hover{
             font-size: 1.02rem;
+        }
+
+
+        .hamburger{
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar{
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            background-color: white;
         }
 
         main hr {
@@ -239,25 +267,41 @@
         @media (max-width: 1000px) {
             /* Navbar */
 
-            nav {
-                flex-direction: column;
+/* 
+            .hamburger{
+                display: block;
             }
 
-            nav ul {
-                position: absolute;
+            .hamburger.active .bar:nth-child(2){
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1){
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3){
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-menu{
+                position: fixed; 
+                left: -100%;
                 top: 70px;
-                left: 0;
-                width: 100%;
+                gap: 0;
+                flex-direction: column;
                 background-color: #061659;
-                /* display: none; */
+                width: 100%;
                 text-align: center;
-                padding: 10px 0;
+                transition: 0.3s;
             }
 
-            nav ul.show {
-                display: flex;
-                flex-direction: column;
+            .nav-item{
+                margin: 16px 0;
             }
+
+            .nav-menu.active{
+                left: 0;
+            } */
 
             /* First section */
             .firstSection {
@@ -356,16 +400,44 @@
             }
         }
 
-        @media (max-width: 488px) {
+        @media (max-width: 548px) {
+
+            .hamburger{
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2){
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1){
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3){
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-menu{
+                position: fixed; 
+                left: -100%;
+                top: 70px;
+                gap: 0;
+                flex-direction: column;
+                background-color: rgba(6, 22, 89, 0.5);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+            }
+
+            .nav-item{
+                margin: 16px 0;
+            }
+
+            .nav-menu.active{
+                left: 0;
+            }
     /* Navbar styles */
-    nav ul {
-        top: 40px; /* Adjust the top spacing for the menu items */
-    }
-
-    nav ul li a {
-        display: none; /* Hide the menu items */
-    }
-
+   
     /* First section */
     .firstSection {
         margin: 0; /* Remove margin */
@@ -491,21 +563,26 @@
 
 <body>
     <header>
-        <nav>
-            <div class="left">Mohsin's Portfolio</div>
-            <div class="right">
-                <div class="menu-icon" onclick="toggleMenu()">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <ul id="menu-items">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/">About</a></li>
-                    <li><a href="/">Services</a></li>
-                    <li><a href="/">Projects</a></li>
-                    <li><a href="/">Contact Me</a></li>
-                </ul>
+        <nav class="navbar">
+            <a href="#" class="nav-branding">Mohsin Roy</a>
+            <ul class="nav-menu">
+                <li class="nav item">
+                    <a href="" class="nav-link">Home</a>
+                </li>
+                <li class="nav item">
+                    <a href="" class="nav-link">About</a>
+                </li>
+                <li class="nav item">
+                    <a href="" class="nav-link">Projects</a>
+                </li>   
+                <li class="nav item">
+                    <a href="" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </nav>
     </header>
@@ -516,7 +593,7 @@
                 <div> Hi, My name is <span class="purple">Mohsin</span></div>
                 <div>and I am a Passionate</div>
                 <div><span id="element"></span></div>
-                <!-- <span id="element"></span> -->
+                <span id="element"></span>
                 <div class="buttons">
                     <button class="btn">Dowload Resume</button>
                     <button class="btn">Visit Github</button>
@@ -610,10 +687,18 @@
         </div>
     </footer>
     <script>
-        function toggleMenu() {
-            const menuItems = document.getElementById("menu-items");
-            menuItems.classList.toggle("show");
-        }
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", ()=> {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        })
+
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () =>{
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }))
     </script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
