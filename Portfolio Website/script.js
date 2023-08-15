@@ -17,3 +17,8 @@ var typed = new Typed('#element', {
     strings: ['<i>Data Analyst</i>', '<i>Web Developer</i>', '<i>Content Writer</i>'],
     typeSpeed: 50,
 });
+
+var myCarousel = new bootstrap.Carousel(document.getElementById('carouselExampleControls'), {
+    interval: 2000 // Set the desired interval for sliding
+});
+
