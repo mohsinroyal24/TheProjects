@@ -1,0 +1,96 @@
+# iValidate - Email Validator Documentation
+
+## Project Overview
+
+**iValidate** is a simple web application that allows users to validate email addresses. It is built using HTML, CSS, and JavaScript. The application consists of three main components:
+
+1. **Frontend (HTML, CSS):** This is responsible for the user interface and layout of the application. It includes a form where users can enter an email address for validation.
+
+2. **Styling (CSS):** This controls the visual appearance of the website, including fonts, colors, and layout.
+
+3. **Backend (JavaScript):** This handles the logic of sending a request to an email validation API, processing the response, and displaying the results on the webpage.
+
+## File Structure
+
+- **index.html:** The main HTML file that contains the structure of the webpage.
+- **styles.css:** The CSS file responsible for styling the webpage.
+- **script.js:** The JavaScript file that contains the logic for sending requests and displaying results.
+- **img:** This folder contains images used in the project.
+
+## HTML Structure
+
+1. **Header (nav):**
+   - Contains the logo and navigation links (Home, About, Contact Us).
+   - Logo consists of an image (email icon) and the iValidate text.
+
+2. **Main Section:**
+   - Contains two containers:
+     - **Container 1:**
+       - Title ("Enter your email to validate").
+       - Input field for entering email address.
+       - Submit button.
+       
+     - **Container 2:**
+       - Title ("Your Results").
+       - Result container (initially displaying "Your results will show here").
+
+3. **Footer:**
+   - Contains copyright information.
+
+## CSS (styles.css)
+
+The CSS file (`styles.css`) is responsible for the visual styling of the webpage. It includes:
+
+- Setting the font family (`Poppins`) for the entire webpage.
+- Styling the navigation bar, links, and logo.
+- Adjusting input field and button styles.
+- Defining the layout for containers and headings.
+
+## JavaScript (script.js)
+
+The JavaScript file (`script.js`) handles the functionality of the application. It performs the following tasks:
+
+1. **Event Listener:**
+   - Listens for a click event on the submit button.
+
+2. **Event Handler (onClick):**
+   - Prevents the default form submission behavior (page reload).
+   - Displays a loading spinner while waiting for the API response.
+
+3. **Sending a Request:**
+   - Retrieves the email address entered by the user.
+   - Constructs a URL for making a request to the Email Validation API.
+
+4. **Fetching Data (Fetch API):**
+   - Sends a GET request to the API with the user's email and API key.
+
+5. **Processing Response:**
+   - Parses the JSON response from the API.
+   - Generates HTML elements to display the validation results.
+
+6. **Updating Result Container:**
+   - Replaces the default message with the validation results.
+
+## Media (img)
+
+The `img` folder contains an email icon (`email.svg`) used in the logo, and a loading spinner (`loading.svg`) displayed while waiting for the API response.
+
+## How to Use
+
+1. Open `index.html` in a web browser.
+2. Enter the email address you want to validate in the input field.
+3. Click the "Submit" button.
+4. The application will display the validation results.
+
+## Additional Information
+
+- The application uses the `fetch` API to communicate with the Email Validation API.
+- The API key (`ema_live_V6O1djadGGY9INDArkDFR3whSIoaQaxzODVXFIjb`) is required for accessing the Email Validation API.
+
+## Important Note
+
+- This application is a basic example and may not cover all edge cases in email validation.
+
+Feel free to customize and enhance the application further based on your requirements.
+
+If you have any questions or need further assistance, please let me know!
